@@ -6,16 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class BattleshipBoard : IBoard
+    class Ship
     {
-        public void CreateBoard()
-        {
-
-        }
-
-        public void UpdateBoard()
-        {
-
-        }
     }
 }

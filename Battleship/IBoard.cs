@@ -9,5 +9,6 @@ namespace Battleship
     interface IBoard
     {
         void CreateBoard();
+        void UpdateBoard();
     }
 }
