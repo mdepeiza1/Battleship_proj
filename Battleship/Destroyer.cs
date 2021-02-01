@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Destroyer
+    class Destroyer : Ship
     {
+        
+        public Destroyer()
+        {
+            length = 2;
+        }
+
+        public override void setFrontCoordinates(int row, int column)
+        {
+            frontRow = row;
+            frontColumn = column;
+        }
+
+        public override void setBackCoordinates(int row, int column)
+        {
+            backRow = row;
+            backColumn = column;
+        }
     }
 }
