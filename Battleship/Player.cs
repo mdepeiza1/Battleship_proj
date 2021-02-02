@@ -53,35 +53,63 @@ namespace Battleship
 
         public void AddShips(int frontRow, int frontColumn, int backRow, int backColumn, int choiceOfShip)
         {
-            switch (choiceOfShip) 
+            switch (choiceOfShip)
             {
                 case 1:
-                    Ship destroyer = new Destroyer();
-                    destroyer.frontRow = frontRow;
-                    destroyer.frontColumn = frontColumn;
-                    destroyer.backRow = backRow;
-                    destroyer.backColumn = backColumn;
+                    if (!destroyerIsChosen)
+                    {
+                        Ship destroyer = new Destroyer();
+                        destroyer.frontRow = frontRow;
+                        destroyer.frontColumn = frontColumn;
+                        destroyer.backRow = backRow;
+                        destroyer.backColumn = backColumn;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The destroyer has already been chosen.");
+                    }
                     break;
                 case 2:
-                    Ship submarine = new Submarine();
-                    submarine.frontRow = frontRow;
-                    submarine.frontColumn = frontColumn;
-                    submarine.backRow = backRow;
-                    submarine.backColumn = backColumn;
+                    if (!submarineIsChosen)
+                    {
+                        Ship submarine = new Submarine();
+                        submarine.frontRow = frontRow;
+                        submarine.frontColumn = frontColumn;
+                        submarine.backRow = backRow;
+                        submarine.backColumn = backColumn;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The submarine has already been chosen.");
+                    }
                     break;
                 case 3:
-                    Ship battleship = new Battleship();
-                    battleship.frontRow = frontRow;
-                    battleship.frontColumn = frontColumn;
-                    battleship.backRow = backRow;
-                    battleship.backColumn = backColumn;
+                    if (!battleshipIsChosen)
+                    {
+                        Ship battleship = new Battleship();
+                        battleship.frontRow = frontRow;
+                        battleship.frontColumn = frontColumn;
+                        battleship.backRow = backRow;
+                        battleship.backColumn = backColumn;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The battleship has already been chosen.");
+                    }
                     break;
                 case 4:
+                    if(!aircraftCarrierIsChosen)
+                    { 
                     Ship aircraftCarrier = new AircraftCarrier();
                     aircraftCarrier.frontRow = frontRow;
                     aircraftCarrier.frontColumn = frontColumn;
                     aircraftCarrier.backRow = backRow;
                     aircraftCarrier.backColumn = backColumn;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The aircraft carrier has already been chosen.");
+                    }
                     break;
                 default:
                     Console.WriteLine("Error, please try again.");
