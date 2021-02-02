@@ -10,10 +10,8 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
-            BattleshipBoard board = new BattleshipBoard();
-            Console.WriteLine("Player 1 goes first");
-            board.CreateBoard();
-            Console.ReadLine();
+            Game game = new Game();
+            game.RunGame();
         }
     }
 }
