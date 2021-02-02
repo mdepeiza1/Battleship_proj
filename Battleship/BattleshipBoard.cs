@@ -12,23 +12,24 @@ namespace Battleship
         public Player player2;
         public string[,] player1board = new string[20,20];
         public string[,] player2board = new string[20,20];
+        bool isItPlayerOnesTurn;
 
         public BattleshipBoard()
         {
             player1 = new Player();
             player2 = new Player();
+            isItPlayerOnesTurn = true;
         }
 
         public void CreateBoard()
         {
-            Console.WriteLine("Player 1 goes first");
             Console.WriteLine("Player 2's Board");
             for(int x = 0; x < 20; x++)
             {
                 for (int y = 0; y < 20; y++)
                 {
-                    player1board[x, y] = "^";
-                    Console.Write(player1board[x, y]);
+                    player2board[x, y] = "^";
+                    Console.Write(player2board[x, y]);
                 }
                 Console.Write("\n");
             }
@@ -38,8 +39,8 @@ namespace Battleship
             {
                 for (int y = 0; y < 20; y++)
                 {
-                    player2board[x, y] = "^";
-                    Console.Write(player2board[x, y]);
+                    player1board[x, y] = "^";
+                    Console.Write(player1board[x, y]);
                 }
                 Console.Write("\n");
             }
@@ -47,15 +48,22 @@ namespace Battleship
 
         public void UpdateBoard()
         {
-
+            if(isItPlayerOnesTurn)
+            {
+                ReloadBoardPlayer1sTurn();
+            }
+            else
+            {
+                ReloadBoardPlayer2sTurn();
+            }
         }
 
-        public void AddShipsPlayer1()
+        public void AddShipsOfPlayer1ToPlayer1sBoard()
         {
 
         }
 
-        public void AddShipsPlayer2()
+        public void AddShipsOfPlayer2ToPlayer2sBoard()
         {
 
         }
@@ -76,9 +84,50 @@ namespace Battleship
             }
         }
 
-        public void ReloadBoard()
+        public void ReloadBoardPlayer1sTurn()
         {
+            Console.WriteLine("Player 2's Board");
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    Console.Write(player2board[x, y]);
+                }
+                Console.Write("\n");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Player 1's board");
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    Console.Write(player1board[x, y]);
+                }
+                Console.Write("\n");
+            }
+        }
 
+        public void ReloadBoardPlayer2sTurn()
+        {
+            Console.WriteLine("Player 1's Board");
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    Console.Write(player1board[x, y]);
+                }
+                Console.Write("\n");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Player 2's board");
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    Console.Write(player2board[x, y]);
+                }
+                Console.Write("\n");
+            }
         }
     }
 }
