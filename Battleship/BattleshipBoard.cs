@@ -49,5 +49,36 @@ namespace Battleship
         {
 
         }
+
+        public void AddShipsPlayer1()
+        {
+
+        }
+
+        public void AddShipsPlayer2()
+        {
+
+        }
+
+        public void AddShotsOfPlayer1ToPlayer2sBoard()
+        {
+            for(int x = 0; x < player1.shots.Count; x++)
+            {
+                player2board[player1.shots[x].row, player1.shots[x].column] = player1.shots[x].attackType;
+            }
+        }
+
+        public void AddShotsOfPlayer2ToPlayer1sBoard()
+        {
+            for (int x = 0; x < player2.shots.Count; x++)
+            {
+                player1board[player2.shots[x].row, player2.shots[x].column] = player2.shots[x].attackType;
+            }
+        }
+
+        public void ReloadBoard()
+        {
+
+        }
     }
 }
