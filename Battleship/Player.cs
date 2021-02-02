@@ -25,8 +25,8 @@ namespace Battleship
                     ((column > opponent.fleet[x].frontColumn && column < opponent.fleet[x].backColumn) ||
                     (column > opponent.fleet[x].backColumn && row < opponent.fleet[x].frontColumn)))
                 {
-                    Attack hit = new Attack();
-                    this.shots.Add()
+                    Attack hit = new Hit(row, column);
+                    this.shots.Add(hit);
                 }
             }
         }

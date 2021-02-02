@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Miss
+    class Miss : Attack
     {
+        public Miss()
+        {
+            attackType = "M";
+        }
+
+        public Miss(int row, int column)
+        {
+            attackType = "M";
+            this.row = row;
+            this.column = column;
+        }
     }
 }

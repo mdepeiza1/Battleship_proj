@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Hit
+    class Hit : Attack
     {
+        public Hit()
+        {
+            attackType = "H";
+        }
+
+        public Hit(int row, int column)
+        {
+            attackType = "H";
+            this.row = row;
+            this.column = column;
+        }
     }
 }
