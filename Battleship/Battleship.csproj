@@ -48,7 +48,9 @@
     <Compile Include="Battleship.cs" />
     <Compile Include="BattleshipBoard.cs" />
     <Compile Include="Destroyer.cs" />
+    <Compile Include="Hit.cs" />
     <Compile Include="IBoard.cs" />
+    <Compile Include="Miss.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

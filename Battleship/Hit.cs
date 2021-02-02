@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    abstract class Attack
+    class Hit
     {
-        public string attackType;
-        public int row;
-        public int column;
     }
 }
