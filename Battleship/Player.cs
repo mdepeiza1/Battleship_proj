@@ -63,6 +63,7 @@ namespace Battleship
                         destroyer.frontColumn = frontColumn;
                         destroyer.backRow = backRow;
                         destroyer.backColumn = backColumn;
+                        destroyerIsChosen = true;
                     }
                     else
                     {
@@ -77,6 +78,7 @@ namespace Battleship
                         submarine.frontColumn = frontColumn;
                         submarine.backRow = backRow;
                         submarine.backColumn = backColumn;
+                        submarineIsChosen = true;
                     }
                     else
                     {
@@ -91,6 +93,7 @@ namespace Battleship
                         battleship.frontColumn = frontColumn;
                         battleship.backRow = backRow;
                         battleship.backColumn = backColumn;
+                        battleshipIsChosen = true;
                     }
                     else
                     {
@@ -98,13 +101,14 @@ namespace Battleship
                     }
                     break;
                 case 4:
-                    if(!aircraftCarrierIsChosen)
-                    { 
-                    Ship aircraftCarrier = new AircraftCarrier();
-                    aircraftCarrier.frontRow = frontRow;
-                    aircraftCarrier.frontColumn = frontColumn;
-                    aircraftCarrier.backRow = backRow;
-                    aircraftCarrier.backColumn = backColumn;
+                    if (!aircraftCarrierIsChosen)
+                    {
+                        Ship aircraftCarrier = new AircraftCarrier();
+                        aircraftCarrier.frontRow = frontRow;
+                        aircraftCarrier.frontColumn = frontColumn;
+                        aircraftCarrier.backRow = backRow;
+                        aircraftCarrier.backColumn = backColumn;
+                        aircraftCarrierIsChosen = true;
                     }
                     else
                     {
