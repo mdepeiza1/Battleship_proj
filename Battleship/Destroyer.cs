@@ -12,6 +12,7 @@ namespace Battleship
         public Destroyer()
         {
             length = 2;
+            typeOfShip = "D";
         }
 
         public override void setFrontCoordinates(int row, int column)

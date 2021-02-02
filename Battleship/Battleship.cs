@@ -11,6 +11,7 @@ namespace Battleship
         public Battleship()
         {
             length = 4;
+            typeOfShip = "B";
         }
 
         public override void setFrontCoordinates(int row, int column)
