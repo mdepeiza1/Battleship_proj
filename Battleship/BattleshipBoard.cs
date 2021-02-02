@@ -64,21 +64,40 @@ namespace Battleship
             {
                 if(player1.fleet[i].frontRow == player1.fleet[i].backRow)
                 {
-                   for(int y = player1.fleet[y].frontColumn; y < player1.fleet[y].backColumn; y++)//update this for the rows 1-20 instead of 0-19
+                   for(int y = player1.fleet[i].frontColumn; y < player1.fleet[i].backColumn; y++)//update this for the rows 1-20 instead of 0-19
                     {
-                        player1board[player1.fleet[i].frontRow, y] = player1.fleet[x].
+                        player1board[player1.fleet[i].frontRow, y] = player1.fleet[i].typeOfShip;
                     }
                 }
                 else
                 {
-
+                    for (int x = player1.fleet[i].frontRow; x < player1.fleet[i].backRow; x++)//update this for the rows 1-20 instead of 0-19
+                    {
+                        player1board[x, player1.fleet[i].frontColumn] = player1.fleet[i].typeOfShip;
+                    }
                 }
             }
         }
 
         public void AddShipsOfPlayer2ToPlayer2sBoard()
         {
-
+            for (int i = 0; i < player2.fleet.Count; i++)
+            {
+                if (player2.fleet[i].frontRow == player2.fleet[i].backRow)
+                {
+                    for (int y = player2.fleet[i].frontColumn; y < player2.fleet[i].backColumn; y++)//update this for the rows 1-20 instead of 0-19
+                    {
+                        player2board[player2.fleet[i].frontRow, y] = player2.fleet[i].typeOfShip;
+                    }
+                }
+                else
+                {
+                    for (int x = player2.fleet[i].frontRow; x < player2.fleet[i].backRow; x++)//update this for the rows 1-20 instead of 0-19
+                    {
+                        player2board[x, player2.fleet[i].frontColumn] = player2.fleet[i].typeOfShip;
+                    }
+                }
+            }
         }
 
         public void AddShotsOfPlayer1ToPlayer2sBoard()
