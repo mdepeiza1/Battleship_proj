@@ -10,6 +10,9 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
+            BattleshipBoard board = new BattleshipBoard();
+            board.CreateBoard();
+            Console.ReadLine();
         }
     }
 }
