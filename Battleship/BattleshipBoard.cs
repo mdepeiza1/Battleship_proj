@@ -86,6 +86,10 @@ namespace Battleship
 
         public void ReloadBoardPlayer1sTurn()
         {
+            Console.Clear();
+            AddShipsOfPlayer1ToPlayer1sBoard();
+            AddShotsOfPlayer1ToPlayer2sBoard();
+            AddShotsOfPlayer2ToPlayer1sBoard();
             Console.WriteLine("Player 2's Board");
             for (int x = 0; x < 20; x++)
             {
@@ -109,6 +113,10 @@ namespace Battleship
 
         public void ReloadBoardPlayer2sTurn()
         {
+            Console.Clear();
+            AddShipsOfPlayer2ToPlayer2sBoard();
+            AddShotsOfPlayer1ToPlayer2sBoard();
+            AddShotsOfPlayer2ToPlayer1sBoard();
             Console.WriteLine("Player 1's Board");
             for (int x = 0; x < 20; x++)
             {
