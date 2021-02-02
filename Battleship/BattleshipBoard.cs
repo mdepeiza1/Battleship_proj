@@ -15,7 +15,8 @@ namespace Battleship
 
         public BattleshipBoard()
         {
-
+            player1 = new Player();
+            player2 = new Player();
         }
 
         public void CreateBoard()

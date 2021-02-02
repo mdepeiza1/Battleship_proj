@@ -18,6 +18,7 @@ namespace Battleship
 
         public void Attack(int row, int column, Player opponent)
         {
+            bool missed = true;
             for(int x = 0; x < opponent.fleet.Count; x++)
             {
                 if (((row > opponent.fleet[x].frontRow && row < opponent.fleet[x].backRow) ||
@@ -27,7 +28,18 @@ namespace Battleship
                 {
                     Attack hit = new Hit(row, column);
                     this.shots.Add(hit);
+                    missed = false;
+                    break;
                 }
+                else
+                {
+                    missed = true;
+                }
+            }
+            if (missed)
+            {
+                Attack miss = new Miss(row, column);
+                this.shots.Add(miss);
             }
         }
     }
