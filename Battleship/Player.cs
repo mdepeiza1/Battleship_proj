@@ -56,7 +56,7 @@ namespace Battleship
             switch (choiceOfShip)
             {
                 case 1:
-                    if (!destroyerIsChosen)
+                    if (!destroyerIsChosen) // add a check for length as well / check for correct placement / check for overlapping
                     {
                         Ship destroyer = new Destroyer();
                         destroyer.frontRow = frontRow;

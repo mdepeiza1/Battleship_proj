@@ -60,7 +60,20 @@ namespace Battleship
 
         public void AddShipsOfPlayer1ToPlayer1sBoard()
         {
+            for(int i = 0; i < player1.fleet.Count; i++)
+            {
+                if(player1.fleet[i].frontRow == player1.fleet[i].backRow)
+                {
+                   for(int y = player1.fleet[y].frontColumn; y < player1.fleet[y].backColumn; y++)//update this for the rows 1-20 instead of 0-19
+                    {
+                        player1board[player1.fleet[i].frontRow, y] = player1.fleet[x].
+                    }
+                }
+                else
+                {
 
+                }
+            }
         }
 
         public void AddShipsOfPlayer2ToPlayer2sBoard()
