@@ -18,8 +18,9 @@ namespace Battleship
 
         public void RunGame()
         {
-            Console.WriteLine("Player 1 goes first");
+            Console.WriteLine("Player 1 goes first!");
             board.CreateBoard();
+            Console.WriteLine("Please press enter to begin:");
             Console.ReadLine();
             bool continuelooping = true;
             while (continuelooping)

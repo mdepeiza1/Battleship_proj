@@ -158,6 +158,20 @@ namespace Battleship
 
         public void ReloadBoardPlayer1sTurn()
         {
+            for (int x = 0; x < 20; x++)//refreshing board
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    player2board[x, y] = "^";
+                }
+            }
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    player1board[x, y] = "^";
+                }
+            }//refreshing board
             Console.Clear();
             AddShipsOfPlayer1ToPlayer1sBoard();
             AddShotsOfPlayer1ToPlayer2sBoard();
@@ -186,6 +200,20 @@ namespace Battleship
 
         public void ReloadBoardPlayer2sTurn()
         {
+            for (int x = 0; x < 20; x++)//refreshing board
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    player2board[x, y] = "^";
+                }
+            }
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    player1board[x, y] = "^";
+                }
+            }//refreshing board
             Console.Clear();
             AddShipsOfPlayer2ToPlayer2sBoard();
             AddShotsOfPlayer1ToPlayer2sBoard();
