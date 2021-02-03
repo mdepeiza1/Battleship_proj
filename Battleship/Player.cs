@@ -24,7 +24,7 @@ namespace Battleship
             aircraftCarrierIsChosen = false;
         }
 
-        public void Attack(int row, int column, Player opponent)
+        public void Attack(int row, int column, Player opponent)//add destroyed ship logic
         {
             bool missed = true;
             for(int x = 0; x < opponent.fleet.Count; x++)
@@ -56,14 +56,22 @@ namespace Battleship
             switch (choiceOfShip)
             {
                 case 1:
-                    if (!destroyerIsChosen) // add a check for length as well / check for correct placement / check for overlapping
+                    if (!destroyerIsChosen) // add a check for length as well / check for overlapping
                     {
-                        Ship destroyer = new Destroyer();
-                        destroyer.frontRow = frontRow;
-                        destroyer.frontColumn = frontColumn;
-                        destroyer.backRow = backRow;
-                        destroyer.backColumn = backColumn;
-                        destroyerIsChosen = true;
+                        if(frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
+                        {
+                            Ship destroyer = new Destroyer();
+                            destroyer.frontRow = frontRow;
+                            destroyer.frontColumn = frontColumn;
+                            destroyer.backRow = backRow;
+                            destroyer.backColumn = backColumn;
+                            destroyerIsChosen = true;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("The destroyer is diagonal.");
+                        }
                     }
                     else
                     {
@@ -73,12 +81,19 @@ namespace Battleship
                 case 2:
                     if (!submarineIsChosen)
                     {
-                        Ship submarine = new Submarine();
+                        if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
+                        {
+                            Ship submarine = new Submarine();
                         submarine.frontRow = frontRow;
                         submarine.frontColumn = frontColumn;
                         submarine.backRow = backRow;
                         submarine.backColumn = backColumn;
                         submarineIsChosen = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The submarine is diagonal.");
+                        }
                     }
                     else
                     {
@@ -88,12 +103,19 @@ namespace Battleship
                 case 3:
                     if (!battleshipIsChosen)
                     {
-                        Ship battleship = new Battleship();
+                        if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
+                        {
+                            Ship battleship = new Battleship();
                         battleship.frontRow = frontRow;
                         battleship.frontColumn = frontColumn;
                         battleship.backRow = backRow;
                         battleship.backColumn = backColumn;
                         battleshipIsChosen = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The battleship is diagonal.");
+                        }
                     }
                     else
                     {
@@ -103,12 +125,19 @@ namespace Battleship
                 case 4:
                     if (!aircraftCarrierIsChosen)
                     {
-                        Ship aircraftCarrier = new AircraftCarrier();
+                        if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
+                        {
+                            Ship aircraftCarrier = new AircraftCarrier();
                         aircraftCarrier.frontRow = frontRow;
                         aircraftCarrier.frontColumn = frontColumn;
                         aircraftCarrier.backRow = backRow;
                         aircraftCarrier.backColumn = backColumn;
                         aircraftCarrierIsChosen = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The aircraft carrier is diagonal.");
+                        }
                     }
                     else
                     {
