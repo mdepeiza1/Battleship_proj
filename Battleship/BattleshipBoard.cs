@@ -204,14 +204,14 @@ namespace Battleship
             {
                 for (int y = 0; y < 20; y++)
                 {
-                    player2board[x, y] = "^";
+                    player1board[x, y] = "^";
                 }
             }
             for (int x = 0; x < 20; x++)
             {
                 for (int y = 0; y < 20; y++)
                 {
-                    player1board[x, y] = "^";
+                    player2board[x, y] = "^";
                 }
             }//refreshing board
             Console.Clear();
