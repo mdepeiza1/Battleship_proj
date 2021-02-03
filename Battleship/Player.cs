@@ -59,7 +59,7 @@ namespace Battleship
             switch (choiceOfShip)
             {
                 case 1:
-                    if (!destroyerIsChosen) 
+                    if (!destroyerIsChosen)
                     {
                         if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
                         {
@@ -68,11 +68,11 @@ namespace Battleship
                             {
                                 establishedPositions = GetPlacedShipPositions();//overlapping logic begins
                                 proposedPosition = GetShipAboutToBePlacedsPosition(frontRow, frontColumn, backRow, backColumn);
-                                for(int i = 0; i < 20; i++)
+                                for (int i = 0; i < 20; i++)
                                 {
-                                    for(int j = 0; j < 20; j++)
+                                    for (int j = 0; j < 20; j++)
                                     {
-                                        if(establishedPositions[i,j] == proposedPosition[i,j])
+                                        if ((establishedPositions[i, j] == proposedPosition[i, j]) && (establishedPositions[i, j] != null))
                                         {
                                             isOverlapping = true;
                                         }
@@ -85,6 +85,7 @@ namespace Battleship
                                     destroyer.frontColumn = frontColumn;
                                     destroyer.backRow = backRow;
                                     destroyer.backColumn = backColumn;
+                                    this.fleet.Add(destroyer);
                                     destroyerIsChosen = true;
                                 }
                                 else
@@ -121,7 +122,7 @@ namespace Battleship
                                 {
                                     for (int j = 0; j < 20; j++)
                                     {
-                                        if (establishedPositions[i, j] == proposedPosition[i, j])
+                                        if ((establishedPositions[i, j] == proposedPosition[i, j]) && (establishedPositions[i, j] != null))
                                         {
                                             isOverlapping = true;
                                         }
@@ -130,11 +131,12 @@ namespace Battleship
                                 if (!isOverlapping)
                                 {
                                     Ship submarine = new Submarine();
-                                submarine.frontRow = frontRow;
-                                submarine.frontColumn = frontColumn;
-                                submarine.backRow = backRow;
-                                submarine.backColumn = backColumn;
-                                submarineIsChosen = true;
+                                    submarine.frontRow = frontRow;
+                                    submarine.frontColumn = frontColumn;
+                                    submarine.backRow = backRow;
+                                    submarine.backColumn = backColumn;
+                                    this.fleet.Add(submarine);
+                                    submarineIsChosen = true;
                                 }
                                 else
                                 {
@@ -170,7 +172,7 @@ namespace Battleship
                                 {
                                     for (int j = 0; j < 20; j++)
                                     {
-                                        if (establishedPositions[i, j] == proposedPosition[i, j])
+                                        if ((establishedPositions[i, j] == proposedPosition[i, j]) && (establishedPositions[i, j] != null))
                                         {
                                             isOverlapping = true;
                                         }
@@ -179,11 +181,12 @@ namespace Battleship
                                 if (!isOverlapping)
                                 {
                                     Ship battleship = new Battleship();
-                                battleship.frontRow = frontRow;
-                                battleship.frontColumn = frontColumn;
-                                battleship.backRow = backRow;
-                                battleship.backColumn = backColumn;
-                                battleshipIsChosen = true;
+                                    battleship.frontRow = frontRow;
+                                    battleship.frontColumn = frontColumn;
+                                    battleship.backRow = backRow;
+                                    battleship.backColumn = backColumn;
+                                    this.fleet.Add(battleship);
+                                    battleshipIsChosen = true;
                                 }
                                 else
                                 {
@@ -219,7 +222,7 @@ namespace Battleship
                                 {
                                     for (int j = 0; j < 20; j++)
                                     {
-                                        if (establishedPositions[i, j] == proposedPosition[i, j])
+                                        if ((establishedPositions[i, j] == proposedPosition[i, j]) && (establishedPositions[i, j] != null))
                                         {
                                             isOverlapping = true;
                                         }
@@ -228,11 +231,12 @@ namespace Battleship
                                 if (!isOverlapping)
                                 {
                                     Ship aircraftCarrier = new AircraftCarrier();
-                                aircraftCarrier.frontRow = frontRow;
-                                aircraftCarrier.frontColumn = frontColumn;
-                                aircraftCarrier.backRow = backRow;
-                                aircraftCarrier.backColumn = backColumn;
-                                aircraftCarrierIsChosen = true;
+                                    aircraftCarrier.frontRow = frontRow;
+                                    aircraftCarrier.frontColumn = frontColumn;
+                                    aircraftCarrier.backRow = backRow;
+                                    aircraftCarrier.backColumn = backColumn;
+                                    this.fleet.Add(aircraftCarrier);
+                                    aircraftCarrierIsChosen = true;
                                 }
                                 else
                                 {
@@ -261,14 +265,14 @@ namespace Battleship
         }
         private string[,] GetPlacedShipPositions()
         {
-            string[,] positions = new string[20,20];
+            string[,] positions = new string[20, 20];
             for (int i = 0; i < this.fleet.Count; i++)//overlapping logic
             {
                 if (this.fleet[i].frontRow == this.fleet[i].backRow)
                 {
-                    if(this.fleet[i].frontColumn > this.fleet[i].backColumn)
+                    if (this.fleet[i].frontColumn > this.fleet[i].backColumn)
                     {
-                        for(int j = this.fleet[i].backColumn; j <= this.fleet[i].frontColumn; j++)
+                        for (int j = this.fleet[i].backColumn; j <= this.fleet[i].frontColumn; j++)
                         {
                             positions[this.fleet[i].frontRow, j] = "T";//for taken
                         }

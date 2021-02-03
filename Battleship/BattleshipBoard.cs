@@ -10,8 +10,8 @@ namespace Battleship
     {
         public Player player1;
         public Player player2;
-        public string[,] player1board = new string[20,20];
-        public string[,] player2board = new string[20,20];
+        public string[,] player1board = new string[20, 20];
+        public string[,] player2board = new string[20, 20];
         bool isItPlayerOnesTurn;
 
         public BattleshipBoard()
@@ -24,7 +24,7 @@ namespace Battleship
         public void CreateBoard()
         {
             Console.WriteLine("Player 2's Board");
-            for(int x = 0; x < 20; x++)
+            for (int x = 0; x < 20; x++)
             {
                 for (int y = 0; y < 20; y++)
                 {
@@ -48,7 +48,7 @@ namespace Battleship
 
         public void UpdateBoard()
         {
-            if(isItPlayerOnesTurn)
+            if (isItPlayerOnesTurn)
             {
                 ReloadBoardPlayer1sTurn();
             }
@@ -60,20 +60,40 @@ namespace Battleship
 
         public void AddShipsOfPlayer1ToPlayer1sBoard()
         {
-            for(int i = 0; i < player1.fleet.Count; i++)
+            for (int i = 0; i < player1.fleet.Count; i++)
             {
-                if(player1.fleet[i].frontRow == player1.fleet[i].backRow)
+                if (player1.fleet[i].frontRow == player1.fleet[i].backRow)
                 {
-                   for(int y = player1.fleet[i].frontColumn; y < player1.fleet[i].backColumn; y++)//update this for the rows 1-20 instead of 0-19
+                    if (player1.fleet[i].frontColumn < player1.fleet[i].backColumn)
                     {
-                        player1board[player1.fleet[i].frontRow, y] = player1.fleet[i].typeOfShip;
+                        for (int y = player1.fleet[i].frontColumn; y <= player1.fleet[i].backColumn; y++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player1board[player1.fleet[i].frontRow, y] = player1.fleet[i].typeOfShip;
+                        }
+                    }
+                    else
+                    {
+                        for (int y = player1.fleet[i].backColumn; y <= player1.fleet[i].frontColumn; y++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player1board[player1.fleet[i].frontRow, y] = player1.fleet[i].typeOfShip;
+                        }
                     }
                 }
                 else
                 {
-                    for (int x = player1.fleet[i].frontRow; x < player1.fleet[i].backRow; x++)//update this for the rows 1-20 instead of 0-19
+                    if (player1.fleet[i].frontRow < player1.fleet[i].backRow)
                     {
-                        player1board[x, player1.fleet[i].frontColumn] = player1.fleet[i].typeOfShip;
+                        for (int x = player1.fleet[i].frontRow; x <= player1.fleet[i].backRow; x++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player1board[x, player1.fleet[i].frontColumn] = player1.fleet[i].typeOfShip;
+                        }
+                    }
+                    else
+                    {
+                        for (int x = player1.fleet[i].backRow; x <= player1.fleet[i].frontRow; x++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player1board[x, player1.fleet[i].frontColumn] = player1.fleet[i].typeOfShip;
+                        }
                     }
                 }
             }
@@ -85,16 +105,36 @@ namespace Battleship
             {
                 if (player2.fleet[i].frontRow == player2.fleet[i].backRow)
                 {
-                    for (int y = player2.fleet[i].frontColumn; y < player2.fleet[i].backColumn; y++)//update this for the rows 1-20 instead of 0-19
+                    if (player2.fleet[i].frontColumn < player2.fleet[i].backColumn)
                     {
-                        player2board[player2.fleet[i].frontRow, y] = player2.fleet[i].typeOfShip;
+                        for (int y = player2.fleet[i].frontColumn; y <= player2.fleet[i].backColumn; y++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player2board[player2.fleet[i].frontRow, y] = player2.fleet[i].typeOfShip;
+                        }
+                    }
+                    else
+                    {
+                        for (int y = player2.fleet[i].backColumn; y <= player2.fleet[i].frontColumn; y++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player2board[player2.fleet[i].frontRow, y] = player2.fleet[i].typeOfShip;
+                        }
                     }
                 }
                 else
                 {
-                    for (int x = player2.fleet[i].frontRow; x < player2.fleet[i].backRow; x++)//update this for the rows 1-20 instead of 0-19
+                    if (player2.fleet[i].frontRow < player2.fleet[i].backRow)
                     {
-                        player2board[x, player2.fleet[i].frontColumn] = player2.fleet[i].typeOfShip;
+                        for (int x = player2.fleet[i].frontRow; x <= player2.fleet[i].backRow; x++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player2board[x, player2.fleet[i].frontColumn] = player2.fleet[i].typeOfShip;
+                        }
+                    }
+                    else
+                    {
+                        for (int x = player2.fleet[i].backRow; x <= player2.fleet[i].frontRow; x++)//update this for the rows 1-20 instead of 0-19
+                        {
+                            player2board[x, player2.fleet[i].frontColumn] = player2.fleet[i].typeOfShip;
+                        }
                     }
                 }
             }
@@ -102,7 +142,7 @@ namespace Battleship
 
         public void AddShotsOfPlayer1ToPlayer2sBoard()
         {
-            for(int x = 0; x < player1.shots.Count; x++)
+            for (int x = 0; x < player1.shots.Count; x++)
             {
                 player2board[player1.shots[x].row, player1.shots[x].column] = player1.shots[x].attackType;
             }
@@ -141,6 +181,7 @@ namespace Battleship
                 }
                 Console.Write("\n");
             }
+            isItPlayerOnesTurn = false;
         }
 
         public void ReloadBoardPlayer2sTurn()
@@ -168,6 +209,7 @@ namespace Battleship
                 }
                 Console.Write("\n");
             }
+            isItPlayerOnesTurn = true;
         }
     }
 }
