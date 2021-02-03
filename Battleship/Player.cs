@@ -27,7 +27,7 @@ namespace Battleship
         public void Attack(int row, int column, Player opponent)//add destroyed ship logic
         {
             bool missed = true;
-            for(int x = 0; x < opponent.fleet.Count; x++)
+            for (int x = 0; x < opponent.fleet.Count; x++)
             {
                 if (((row >= opponent.fleet[x].frontRow && row <= opponent.fleet[x].backRow) ||
                     (row >= opponent.fleet[x].backRow && row <= opponent.fleet[x].frontRow)) &&
@@ -53,20 +53,27 @@ namespace Battleship
 
         public void AddShips(int frontRow, int frontColumn, int backRow, int backColumn, int choiceOfShip)
         {
-            switch (choiceOfShip)
+            switch (choiceOfShip)// add check for overlapping
             {
                 case 1:
-                    if (!destroyerIsChosen) // add a check for length as well / check for overlapping
+                    if (!destroyerIsChosen) 
                     {
-                        if(frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
+                        if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
                         {
-                            Ship destroyer = new Destroyer();
-                            destroyer.frontRow = frontRow;
-                            destroyer.frontColumn = frontColumn;
-                            destroyer.backRow = backRow;
-                            destroyer.backColumn = backColumn;
-                            destroyerIsChosen = true;
-
+                            if ((frontRow == backRow) && (frontColumn + 1 == backColumn || backColumn + 1 == frontColumn)
+                                || (frontColumn == backColumn) && (frontRow + 1 == backRow || backRow + 1 == frontRow)) // check for length
+                            {
+                                Ship destroyer = new Destroyer();
+                                destroyer.frontRow = frontRow;
+                                destroyer.frontColumn = frontColumn;
+                                destroyer.backRow = backRow;
+                                destroyer.backColumn = backColumn;
+                                destroyerIsChosen = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("The destroyer is not the correct length.");
+                            }
                         }
                         else
                         {
@@ -83,12 +90,20 @@ namespace Battleship
                     {
                         if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
                         {
-                            Ship submarine = new Submarine();
-                        submarine.frontRow = frontRow;
-                        submarine.frontColumn = frontColumn;
-                        submarine.backRow = backRow;
-                        submarine.backColumn = backColumn;
-                        submarineIsChosen = true;
+                            if ((frontRow == backRow) && (frontColumn + 2 == backColumn || backColumn + 2 == frontColumn)
+                                || (frontColumn == backColumn) && (frontRow + 2 == backRow || backRow + 2 == frontRow))
+                            {
+                                Ship submarine = new Submarine();
+                                submarine.frontRow = frontRow;
+                                submarine.frontColumn = frontColumn;
+                                submarine.backRow = backRow;
+                                submarine.backColumn = backColumn;
+                                submarineIsChosen = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("The submarine is not the correct length.");
+                            }
                         }
                         else
                         {
@@ -105,12 +120,20 @@ namespace Battleship
                     {
                         if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
                         {
-                            Ship battleship = new Battleship();
-                        battleship.frontRow = frontRow;
-                        battleship.frontColumn = frontColumn;
-                        battleship.backRow = backRow;
-                        battleship.backColumn = backColumn;
-                        battleshipIsChosen = true;
+                            if ((frontRow == backRow) && (frontColumn + 3 == backColumn || backColumn + 3 == frontColumn)
+                                || (frontColumn == backColumn) && (frontRow + 3 == backRow || backRow + 3 == frontRow))
+                            {
+                                Ship battleship = new Battleship();
+                                battleship.frontRow = frontRow;
+                                battleship.frontColumn = frontColumn;
+                                battleship.backRow = backRow;
+                                battleship.backColumn = backColumn;
+                                battleshipIsChosen = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("The battleship is not the correct length.");
+                            }
                         }
                         else
                         {
@@ -127,12 +150,20 @@ namespace Battleship
                     {
                         if (frontRow == backRow || frontColumn == backColumn) //this is a check for correct placement / not diagonal
                         {
-                            Ship aircraftCarrier = new AircraftCarrier();
-                        aircraftCarrier.frontRow = frontRow;
-                        aircraftCarrier.frontColumn = frontColumn;
-                        aircraftCarrier.backRow = backRow;
-                        aircraftCarrier.backColumn = backColumn;
-                        aircraftCarrierIsChosen = true;
+                            if ((frontRow == backRow) && (frontColumn + 4 == backColumn || backColumn + 4 == frontColumn)
+                                || (frontColumn == backColumn) && (frontRow + 4 == backRow || backRow + 4 == frontRow))
+                            {
+                                Ship aircraftCarrier = new AircraftCarrier();
+                                aircraftCarrier.frontRow = frontRow;
+                                aircraftCarrier.frontColumn = frontColumn;
+                                aircraftCarrier.backRow = backRow;
+                                aircraftCarrier.backColumn = backColumn;
+                                aircraftCarrierIsChosen = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("The aircraft carrier is not the correct length.");
+                            }
                         }
                         else
                         {
