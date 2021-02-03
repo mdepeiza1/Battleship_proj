@@ -26,16 +26,24 @@ namespace Battleship
 
         public void Attack(int row, int column, Player opponent)//add destroyed ship logic
         {
+            string[,] establishedPositions = new string[20, 20];
+            int i = row;
+            int j = column;
             bool missed = true;
             for (int x = 0; x < opponent.fleet.Count; x++)
             {
-                if (((row >= opponent.fleet[x].frontRow && row <= opponent.fleet[x].backRow) ||
-                    (row >= opponent.fleet[x].backRow && row <= opponent.fleet[x].frontRow)) &&
-                    ((column >= opponent.fleet[x].frontColumn && column <= opponent.fleet[x].backColumn) ||
-                    (column >= opponent.fleet[x].backColumn && row <= opponent.fleet[x].frontColumn)))
+                //if (((row >= opponent.fleet[x].frontRow && row <= opponent.fleet[x].backRow) ||
+                //    (row >= opponent.fleet[x].backRow && row <= opponent.fleet[x].frontRow)) &&
+                //    ((column >= opponent.fleet[x].frontColumn && column <= opponent.fleet[x].backColumn) ||
+                //    (column >= opponent.fleet[x].backColumn && row <= opponent.fleet[x].frontColumn)))
+                //{
+                //}
+                establishedPositions = GetPlacedShipPositions();//overlapping logic begins
+                if (establishedPositions[i, j] == "T")
                 {
                     Attack hit = new Hit(row, column);
                     this.shots.Add(hit);
+                    Console.WriteLine("You hit your target!");
                     missed = false;
                     break;
                 }
@@ -48,6 +56,7 @@ namespace Battleship
             {
                 Attack miss = new Miss(row, column);
                 this.shots.Add(miss);
+                Console.WriteLine("You missed your target!");
             }
         }
 

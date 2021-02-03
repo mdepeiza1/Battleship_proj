@@ -10,6 +10,7 @@ namespace Battleship
 {
     class Game
     {
+        bool nobodyHasWonYet = true;
         BattleshipBoard board;
         public Game()
         {
@@ -51,7 +52,7 @@ namespace Battleship
                                         if (Int32.TryParse(Console.ReadLine(), out int value4))
                                         {
                                             board.player1.AddShips(value1, value2, value3, value4, 1);
-                                            if(board.player1.fleet.Count == 4)
+                                            if (board.player1.fleet.Count == 4)
                                             {
                                                 continuelooping = false;
                                             }
@@ -91,9 +92,9 @@ namespace Battleship
                                         if (Int32.TryParse(Console.ReadLine(), out int value8))
                                         {
                                             board.player1.AddShips(value5, value6, value7, value8, 2);
-                                            if(board.player1.fleet.Count == 4)
+                                            if (board.player1.fleet.Count == 4)
                                             {
-                                            continuelooping = false;
+                                                continuelooping = false;
                                             }
                                             break;
                                         }
@@ -131,9 +132,9 @@ namespace Battleship
                                         if (Int32.TryParse(Console.ReadLine(), out int value12))
                                         {
                                             board.player1.AddShips(value9, value10, value11, value12, 3);
-                                            if(board.player1.fleet.Count == 4)
+                                            if (board.player1.fleet.Count == 4)
                                             {
-                                            continuelooping = false;
+                                                continuelooping = false;
                                             }
                                             break;
                                         }
@@ -171,9 +172,9 @@ namespace Battleship
                                         if (Int32.TryParse(Console.ReadLine(), out int value16))
                                         {
                                             board.player1.AddShips(value13, value14, value15, value16, 4);
-                                            if(board.player1.fleet.Count == 4)
+                                            if (board.player1.fleet.Count == 4)
                                             {
-                                            continuelooping = false;
+                                                continuelooping = false;
                                             }
                                             break;
                                         }
@@ -203,7 +204,7 @@ namespace Battleship
                 {
                     Console.WriteLine("Please enter an integer.");
                 }
-               
+
             }
             board.UpdateBoard();
             Console.WriteLine("Board will be cleared in 8 seconds.");
@@ -400,6 +401,65 @@ namespace Battleship
             Console.Clear();
             Console.WriteLine("Please press enter to begin the game:");
             Console.ReadLine();
+
+            while (nobodyHasWonYet)
+            {
+                board.UpdateBoard(); //Player 1's turn
+                Console.WriteLine("Please enter the row of your first attack:");
+                while (true)
+                {
+                    if (Int32.TryParse(Console.ReadLine(), out int attrow1))
+                    {
+                        Console.WriteLine("Please enter the column of your first attack:");
+                        if (Int32.TryParse(Console.ReadLine(), out int attcol1))
+                        {
+                            board.player1.Attack(attrow1, attcol1, board.player2);//add check for winning condition in here
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please enter an integer.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter an integer.");
+                    }
+                }
+                Console.WriteLine("Board will be cleared in 8 seconds.");
+                Thread.Sleep(8000);
+                Console.Clear();
+                Console.WriteLine("Please press enter to go to Player 2's turn:");
+                Console.ReadLine();
+
+                board.UpdateBoard(); //Player 1's turn
+                Console.WriteLine("Please enter the row of your first attack:");
+                while (true)
+                {
+                    if (Int32.TryParse(Console.ReadLine(), out int attrow2))
+                    {
+                        Console.WriteLine("Please enter the column of your first attack:");
+                        if (Int32.TryParse(Console.ReadLine(), out int attcol2))
+                        {
+                            board.player2.Attack(attrow2, attcol2, board.player1);//add check for winning condition in here
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please enter an integer.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter an integer.");
+                    }
+                }
+                Console.WriteLine("Board will be cleared in 8 seconds.");
+                Thread.Sleep(8000);
+                Console.Clear();
+                Console.WriteLine("Please press enter to go to Player 1's turn:");
+                Console.ReadLine();
+            }
         }
     }
 }
