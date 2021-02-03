@@ -10,11 +10,16 @@ namespace Battleship
 {
     class Game
     {
-        bool nobodyHasWonYet = true;
+        bool nobodyHasWonYet;
+        bool p1Won;
+        bool p2Won;
         BattleshipBoard board;
         public Game()
         {
             board = new BattleshipBoard();
+            nobodyHasWonYet = true;
+            p1Won = false;
+            p2Won = false;
         }
 
         public void RunGame()
@@ -402,7 +407,7 @@ namespace Battleship
             Console.WriteLine("Please press enter to begin the game:");
             Console.ReadLine();
 
-            while (nobodyHasWonYet)
+            while (nobodyHasWonYet) //handle out of range exceptions too
             {
                 board.UpdateBoard(); //Player 1's turn
                 Console.WriteLine("Please enter the row of your first attack:");
@@ -413,7 +418,12 @@ namespace Battleship
                         Console.WriteLine("Please enter the column of your first attack:");
                         if (Int32.TryParse(Console.ReadLine(), out int attcol1))
                         {
-                            board.player1.Attack(attrow1, attcol1, board.player2);//add check for winning condition in here
+                            if(board.player1.Attack(attrow1, attcol1, board.player2))//add check for winning condition in here
+                            {
+                                nobodyHasWonYet = false;
+                                p1Won = true;
+                            }//add check for winning condition in here
+
                             break;
                         }
                         else
@@ -426,13 +436,17 @@ namespace Battleship
                         Console.WriteLine("Please enter an integer.");
                     }
                 }
+                if(p1Won)
+                {
+                    break;
+                }
                 Console.WriteLine("Board will be cleared in 8 seconds.");
                 Thread.Sleep(8000);
                 Console.Clear();
                 Console.WriteLine("Please press enter to go to Player 2's turn:");
                 Console.ReadLine();
 
-                board.UpdateBoard(); //Player 1's turn
+                board.UpdateBoard(); //Player 2's turn
                 Console.WriteLine("Please enter the row of your first attack:");
                 while (true)
                 {
@@ -441,7 +455,11 @@ namespace Battleship
                         Console.WriteLine("Please enter the column of your first attack:");
                         if (Int32.TryParse(Console.ReadLine(), out int attcol2))
                         {
-                            board.player2.Attack(attrow2, attcol2, board.player1);//add check for winning condition in here
+                            if (board.player2.Attack(attrow2, attcol2, board.player1))
+                            {
+                                nobodyHasWonYet = false;
+                                p2Won = true;
+                            }//add check for winning condition in here
                             break;
                         }
                         else
@@ -454,10 +472,28 @@ namespace Battleship
                         Console.WriteLine("Please enter an integer.");
                     }
                 }
+                if(p2Won)
+                {
+                    break;
+                }
                 Console.WriteLine("Board will be cleared in 8 seconds.");
                 Thread.Sleep(8000);
                 Console.Clear();
                 Console.WriteLine("Please press enter to go to Player 1's turn:");
+                Console.ReadLine();
+            }
+            if (p1Won)
+            {
+                Console.Clear();
+                Console.WriteLine("Player One Has Won!");
+                Console.WriteLine("Please press enter to end the game.");
+                Console.ReadLine();
+            }
+            if (p2Won)
+            {
+                Console.Clear();
+                Console.WriteLine("Player Two Has Won!");
+                Console.WriteLine("Please press enter to end the game.");
                 Console.ReadLine();
             }
         }

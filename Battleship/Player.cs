@@ -24,12 +24,13 @@ namespace Battleship
             aircraftCarrierIsChosen = false;
         }
 
-        public void Attack(int row, int column, Player opponent)//add destroyed ship logic
+        public bool Attack(int row, int column, Player opponent)//add destroyed ship logic
         {
             string[,] establishedPositions = new string[20, 20];
             int i = row;
             int j = column;
             bool missed = true;
+            int hasWon = 0;
             for (int x = 0; x < opponent.fleet.Count; x++)
             {
                 //if (((row >= opponent.fleet[x].frontRow && row <= opponent.fleet[x].backRow) ||
@@ -38,13 +39,24 @@ namespace Battleship
                 //    (column >= opponent.fleet[x].backColumn && row <= opponent.fleet[x].frontColumn)))
                 //{
                 //}
-                establishedPositions = GetPlacedShipPositions();//overlapping logic begins
+                establishedPositions = opponent.GetPlacedShipPositions();//overlapping logic begins
                 if (establishedPositions[i, j] == "T")
                 {
                     Attack hit = new Hit(row, column);
                     this.shots.Add(hit);
                     Console.WriteLine("You hit your target!");
                     missed = false;
+                    for(int y = 0; y < this.shots.Count; y++)
+                    {
+                        if(establishedPositions[opponent.shots[y].row, opponent.shots[y].column] == "H")
+                        {
+                            hasWon++;
+                        }
+                    }
+                    if(hasWon == 14)
+                    {
+                        return true;
+                    }
                     break;
                 }
                 else
@@ -57,7 +69,9 @@ namespace Battleship
                 Attack miss = new Miss(row, column);
                 this.shots.Add(miss);
                 Console.WriteLine("You missed your target!");
+                return false;
             }
+            return false;
         }
 
         public void AddShips(int frontRow, int frontColumn, int backRow, int backColumn, int choiceOfShip)
@@ -272,7 +286,7 @@ namespace Battleship
                     break;
             }
         }
-        private string[,] GetPlacedShipPositions()
+        public string[,] GetPlacedShipPositions()
         {
             string[,] positions = new string[20, 20];
             for (int i = 0; i < this.fleet.Count; i++)//overlapping logic
