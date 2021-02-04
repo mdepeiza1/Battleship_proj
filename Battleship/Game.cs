@@ -440,8 +440,8 @@ namespace Battleship
                 {
                     break;
                 }
-                Console.WriteLine("Board will be cleared in 8 seconds.");
-                Thread.Sleep(8000);
+                Console.WriteLine("Board will be cleared in 5 seconds.");
+                Thread.Sleep(5000);
                 Console.Clear();
                 Console.WriteLine("Please press enter to go to Player 2's turn:");
                 Console.ReadLine();
@@ -476,8 +476,8 @@ namespace Battleship
                 {
                     break;
                 }
-                Console.WriteLine("Board will be cleared in 8 seconds.");
-                Thread.Sleep(8000);
+                Console.WriteLine("Board will be cleared in 5 seconds.");
+                Thread.Sleep(5000);
                 Console.Clear();
                 Console.WriteLine("Please press enter to go to Player 1's turn:");
                 Console.ReadLine();
@@ -495,7 +495,7 @@ namespace Battleship
                 Console.WriteLine("Player Two Has Won!");
                 Console.WriteLine("Please press enter to end the game.");
                 Console.ReadLine();
-            }
+            }//"hit and sunk" needs to be added, out of bounds needs to be handled
         }
     }
 }
