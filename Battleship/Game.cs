@@ -24,8 +24,8 @@ namespace Battleship
 
         public void RunGame()
         {
-            Console.WriteLine("Player 1 goes first!");
             board.CreateBoard();
+            Console.WriteLine("Player 1 goes first!");
             Console.WriteLine("Please press enter to begin:");
             Console.ReadLine();
             bool continuelooping = true;
@@ -413,10 +413,10 @@ namespace Battleship
                 Console.WriteLine("Please enter the row of your first attack:");
                 while (true)
                 {
-                    if (Int32.TryParse(Console.ReadLine(), out int attrow1))
+                    if ((Int32.TryParse(Console.ReadLine(), out int attrow1)) && (attrow1 >= 0 && attrow1 <= 19))
                     {
                         Console.WriteLine("Please enter the column of your first attack:");
-                        if (Int32.TryParse(Console.ReadLine(), out int attcol1))
+                        if ((Int32.TryParse(Console.ReadLine(), out int attcol1)) && (attcol1 >= 0 && attcol1 <= 19))
                         {
                             if(board.player1.Attack(attrow1, attcol1, board.player2))//add check for winning condition in here
                             {
@@ -428,12 +428,12 @@ namespace Battleship
                         }
                         else
                         {
-                            Console.WriteLine("Please enter an integer.");
+                            Console.WriteLine("Please enter an integer from 0 to 19.");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Please enter an integer.");
+                        Console.WriteLine("Please enter an integer from 0 to 19.");
                     }
                 }
                 if(p1Won)
@@ -450,10 +450,10 @@ namespace Battleship
                 Console.WriteLine("Please enter the row of your first attack:");
                 while (true)
                 {
-                    if (Int32.TryParse(Console.ReadLine(), out int attrow2))
+                    if ((Int32.TryParse(Console.ReadLine(), out int attrow2)) && (attrow2 >= 0 && attrow2 <= 19))
                     {
                         Console.WriteLine("Please enter the column of your first attack:");
-                        if (Int32.TryParse(Console.ReadLine(), out int attcol2))
+                        if ((Int32.TryParse(Console.ReadLine(), out int attcol2)) && (attcol2 >= 0 && attcol2 <= 19))
                         {
                             if (board.player2.Attack(attrow2, attcol2, board.player1))
                             {
@@ -464,12 +464,12 @@ namespace Battleship
                         }
                         else
                         {
-                            Console.WriteLine("Please enter an integer.");
+                            Console.WriteLine("Please enter an integer from 0 to 19.");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Please enter an integer.");
+                        Console.WriteLine("Please enter an integer from 0 to 19.");
                     }
                 }
                 if(p2Won)
