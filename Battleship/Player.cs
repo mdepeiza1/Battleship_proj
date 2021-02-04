@@ -48,7 +48,7 @@ namespace Battleship
                     missed = false;
                     for(int y = 0; y < this.shots.Count; y++)
                     {
-                        if(establishedPositions[opponent.shots[y].row, opponent.shots[y].column] == "H")
+                        if (this.shots[y].attackType == "H")
                         {
                             hasWon++;
                         }
