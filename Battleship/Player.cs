@@ -14,6 +14,11 @@ namespace Battleship
         bool submarineIsChosen;
         bool battleshipIsChosen;
         bool aircraftCarrierIsChosen;
+        bool alreadyHit = false;
+        int hitDestroyer;
+        int hitSubmarine;
+        int hitBattleship;
+        int hitAircraftCarrier;
         public Player()
         {
             fleet = new List<Ship>();
@@ -22,6 +27,10 @@ namespace Battleship
             submarineIsChosen = false;
             battleshipIsChosen = false;
             aircraftCarrierIsChosen = false;
+            hitDestroyer = 0;
+            hitSubmarine = 0;
+            hitBattleship = 0;
+            hitAircraftCarrier = 0;
         }
 
         public bool Attack(int row, int column, Player opponent)//add destroyed ship logic
@@ -39,13 +48,47 @@ namespace Battleship
                 //    (column >= opponent.fleet[x].backColumn && row <= opponent.fleet[x].frontColumn)))
                 //{
                 //}
-                establishedPositions = opponent.GetPlacedShipPositions();//overlapping logic begins
-                if (establishedPositions[i, j] == "T")
+                establishedPositions = opponent.GetPlacedShipPositionsWithTypeOfShip();
+                if (establishedPositions[i, j] == "DT")
                 {
                     Attack hit = new Hit(row, column);
-                    this.shots.Add(hit);
-                    Console.WriteLine("You hit your target!");
-                    missed = false;
+                    for (int y = 0; y < this.shots.Count; y++)
+                    {
+                        if (this.shots[y].attackType == "H" && (this.shots[y].row == i && this.shots[y].column == j))
+                        {
+                            alreadyHit = true;
+                            break;
+                        }
+                        alreadyHit = false; //may cause issues
+                    }
+                    if(!alreadyHit)
+                    {
+                        this.shots.Add(hit);
+                        Console.WriteLine("You hit your target!");
+                        missed = false;
+                        hitDestroyer++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You already hit that target.");
+                        missed = false;
+                    }
+                    if(hitDestroyer == 2)
+                    {
+                        Console.WriteLine("You sank the destroyer!");
+                    }
+                    if(hitSubmarine == 3)
+                    {
+                        Console.WriteLine("You sank the submarine!");
+                    }
+                    if(hitBattleship == 4)
+                    {
+                        Console.WriteLine("You sank the battleship!");
+                    }
+                    if(hitAircraftCarrier == 5)
+                    {
+                        Console.WriteLine("You sank the aircraft carrier!");
+                    }
                     for(int y = 0; y < this.shots.Count; y++)
                     {
                         if (this.shots[y].attackType == "H")
@@ -54,6 +97,165 @@ namespace Battleship
                         }
                     }
                     if(hasWon == 14)
+                    {
+                        return true;
+                    }
+                    break;
+                }//logic may allow for multiple hits on a ship
+                else if (establishedPositions[i, j] == "ST")
+                {
+                    Attack hit = new Hit(row, column);
+                    for (int y = 0; y < this.shots.Count; y++)//logic for multiple hits in same position
+                    {
+                        if (this.shots[y].attackType == "H" && (this.shots[y].row == i && this.shots[y].column == j))
+                        {
+                            alreadyHit = true;
+                            break;
+                        }
+                        alreadyHit = false; //may cause issues
+                    }
+                    if (!alreadyHit)
+                    {
+                        this.shots.Add(hit);
+                        Console.WriteLine("You hit your target!");
+                        missed = false;
+                        hitSubmarine++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You already hit that target.");
+                        missed = false;
+                    }
+                    if (hitDestroyer == 2)
+                    {
+                        Console.WriteLine("You sank the destroyer!");
+                    }
+                    if (hitSubmarine == 3)
+                    {
+                        Console.WriteLine("You sank the submarine!");
+                    }
+                    if (hitBattleship == 4)
+                    {
+                        Console.WriteLine("You sank the battleship!");
+                    }
+                    if (hitAircraftCarrier == 5)
+                    {
+                        Console.WriteLine("You sank the aircraft carrier!");
+                    }
+                    for (int y = 0; y < this.shots.Count; y++)
+                    {
+                        if (this.shots[y].attackType == "H")
+                        {
+                            hasWon++;
+                        }
+                    }
+                    if (hasWon == 14)
+                    {
+                        return true;
+                    }
+                    break;
+                }
+                else if (establishedPositions[i, j] == "BT")
+                {
+                    Attack hit = new Hit(row, column);
+                    for (int y = 0; y < this.shots.Count; y++)//logic for multiple hits in same position
+                    {
+                        if (this.shots[y].attackType == "H" && (this.shots[y].row == i && this.shots[y].column == j))
+                        {
+                            alreadyHit = true;
+                            break;
+                        }
+                        alreadyHit = false; //may cause issues
+                    }
+                    if (!alreadyHit)
+                    {
+                        this.shots.Add(hit);
+                        Console.WriteLine("You hit your target!");
+                        missed = false;
+                        hitBattleship++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You already hit that target.");
+                        missed = false;
+                    }
+                    if (hitDestroyer == 2)
+                    {
+                        Console.WriteLine("You sank the destroyer!");
+                    }
+                    if (hitSubmarine == 3)
+                    {
+                        Console.WriteLine("You sank the submarine!");
+                    }
+                    if (hitBattleship == 4)
+                    {
+                        Console.WriteLine("You sank the battleship!");
+                    }
+                    if (hitAircraftCarrier == 5)
+                    {
+                        Console.WriteLine("You sank the aircraft carrier!");
+                    }
+                    for (int y = 0; y < this.shots.Count; y++)
+                    {
+                        if (this.shots[y].attackType == "H")
+                        {
+                            hasWon++;
+                        }
+                    }
+                    if (hasWon == 14)
+                    {
+                        return true;
+                    }
+                    break;
+                }
+                else if (establishedPositions[i, j] == "AT")
+                {
+                    Attack hit = new Hit(row, column);
+                    for (int y = 0; y < this.shots.Count; y++)//logic for multiple hits in same position
+                    {
+                        if (this.shots[y].attackType == "H" && (this.shots[y].row == i && this.shots[y].column == j))
+                        {
+                            alreadyHit = true;
+                            break;
+                        }
+                        alreadyHit = false; //may cause issues
+                    }
+                    if (!alreadyHit)
+                    {
+                        this.shots.Add(hit);
+                        Console.WriteLine("You hit your target!");
+                        missed = false;
+                        hitAircraftCarrier++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You already hit that target.");
+                        missed = false;
+                    }
+                    if (hitDestroyer == 2)
+                    {
+                        Console.WriteLine("You sank the destroyer!");
+                    }
+                    if (hitSubmarine == 3)
+                    {
+                        Console.WriteLine("You sank the submarine!");
+                    }
+                    if (hitBattleship == 4)
+                    {
+                        Console.WriteLine("You sank the battleship!");
+                    }
+                    if (hitAircraftCarrier == 5)
+                    {
+                        Console.WriteLine("You sank the aircraft carrier!");
+                    }
+                    for (int y = 0; y < this.shots.Count; y++)
+                    {
+                        if (this.shots[y].attackType == "H")
+                        {
+                            hasWon++;
+                        }
+                    }
+                    if (hasWon == 14)
                     {
                         return true;
                     }
@@ -69,6 +271,22 @@ namespace Battleship
                 Attack miss = new Miss(row, column);
                 this.shots.Add(miss);
                 Console.WriteLine("You missed your target!");
+                if (hitDestroyer == 2)
+                {
+                    Console.WriteLine("You sank the destroyer!");
+                }
+                if (hitSubmarine == 3)
+                {
+                    Console.WriteLine("You sank the submarine!");
+                }
+                if (hitBattleship == 4)
+                {
+                    Console.WriteLine("You sank the battleship!");
+                }
+                if (hitAircraftCarrier == 5)
+                {
+                    Console.WriteLine("You sank the aircraft carrier!");
+                }
                 return false;
             }
             return false;
@@ -367,6 +585,49 @@ namespace Battleship
                 }
             }
 
+            return positions;
+        }
+
+        public string[,] GetPlacedShipPositionsWithTypeOfShip() //sunken ship logic
+        {
+            string[,] positions = new string[20, 20];
+            for (int i = 0; i < this.fleet.Count; i++)
+            {
+                if (this.fleet[i].frontRow == this.fleet[i].backRow)
+                {
+                    if (this.fleet[i].frontColumn > this.fleet[i].backColumn)
+                    {
+                        for (int j = this.fleet[i].backColumn; j <= this.fleet[i].frontColumn; j++)
+                        {
+                            positions[this.fleet[i].frontRow, j] = this.fleet[i].typeOfShip + "T";//for taken
+                        }
+                    }
+                    else if (this.fleet[i].frontColumn < this.fleet[i].backColumn)
+                    {
+                        for (int j = this.fleet[i].frontColumn; j <= this.fleet[i].backColumn; j++)
+                        {
+                            positions[this.fleet[i].frontRow, j] = this.fleet[i].typeOfShip + "T";
+                        }
+                    }
+                }
+                else
+                {
+                    if (this.fleet[i].frontRow > this.fleet[i].backRow)
+                    {
+                        for (int j = this.fleet[i].backRow; j <= this.fleet[i].frontRow; j++)
+                        {
+                            positions[j, this.fleet[i].frontColumn] = this.fleet[i].typeOfShip + "T";
+                        }
+                    }
+                    else if (this.fleet[i].frontRow < this.fleet[i].backRow)
+                    {
+                        for (int j = this.fleet[i].frontRow; j <= this.fleet[i].backRow; j++)
+                        {
+                            positions[j, this.fleet[i].frontColumn] = this.fleet[i].typeOfShip + "T";
+                        }
+                    }
+                }
+            }//sunken ship logic
             return positions;
         }
     }
